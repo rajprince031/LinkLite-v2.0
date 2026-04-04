@@ -1,0 +1,131 @@
+/* Trigger Button */
+.update_profile_edit_button {
+  cursor: pointer;
+  font-weight: 500;
+  margin: 10px 0;
+  color: #1f2937;
+}
+
+/* Overlay background */
+.update_profile_dialog_box_overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.update_profile {
+  width: 100%;
+}
+
+/* Main dialog box */
+.update_profile_main_content_box {
+  display: flex;
+  flex-direction: column;
+  min-width: 360px;
+  width: 420px;
+  background: linear-gradient(180deg, #fffdf9 0%, #f6f1ea 100%);
+  border-radius: 16px;
+  padding: 26px;
+  gap: 14px;
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.14);
+  border: 1px solid rgba(17, 93, 252, 0.08);
+}
+
+/* Title */
+.update_profile_title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 4px;
+  color: #212121;
+  text-align: center;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+/* Input container for each field */
+.input_container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+/* Input label */
+.input_label {
+  font-size: 0.78rem;
+  color: #5a6472;
+  font-weight: 600;
+  text-align: left;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+/* Input field style */
+.input_field {
+  height: 42px;
+  padding: 0 12px;
+  border-radius: 10px;
+  outline: none;
+  border: 1px solid #d9dfeb;
+  background-color: #fff;
+  font-size: 14px;
+  transition: border 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.input_field_readonly {
+  background-color: #f6f7f9;
+  color: #5b6470;
+  cursor: not-allowed;
+}
+
+.update_profile_helper_text {
+  font-size: 11px;
+  color: #6b7280;
+  line-height: 1.4;
+}
+
+.input_field:focus {
+  border-color: #115DFC;
+  box-shadow: 0 0 0 3px rgba(17, 93, 252, 0.12);
+}
+
+/* Button container */
+.update_profile_button_container {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* Buttons */
+.update_profile_button_container button {
+  padding: 11px 18px;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  font-weight: 600;
+  flex: 1;
+}
+
+/* Save Button */
+.update_profile_button_container button:first-child {
+  background: linear-gradient(135deg, #115dfc, #0c8ce9);
+  color: white;
+}
+
+/* Cancel Button */
+.update_profile_button_container button:last-child {
+  background-color: #e9edf3;
+  color: #334155;
+}
+
+.update_profile_button_container button:hover {
+  opacity: 0.95;
+  transform: translateY(-1px);
+}

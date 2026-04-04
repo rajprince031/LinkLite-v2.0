@@ -1,0 +1,56 @@
+server:
+  port: ${PORT:8080}
+
+spring:
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: ${DB_DRIVER}
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: ${DB_DIALECT}
+    properties:
+      hibernate:
+        format_sql: true
+    open-in-view: false
+  h2:
+    console:
+      enabled: ${H2_CONSOLE_ENABLED:false}
+      path: /h2-console
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+app:
+  frontend-url: ${FRONTEND_URL}
+  base-url: ${BASE_URL}
+
+  jwt-secret: ${JWT_SECRET}
+  jwt-expiration-ms: ${JWT_EXPIRATION_MS:86400000}
+  otp-expiration-minutes: ${OTP_EXPIRATION_MINUTES:10}
+  dev-print-otp: ${DEV_PRINT_OTP:false}
+  seed-demo-data: ${SEED_DEMO_DATA:false}
+
+  admin:
+    email: ${ADMIN_EMAIL:}
+    password: ${ADMIN_PASSWORD:}
+    first-name: ${ADMIN_FIRST_NAME:}
+    last-name: ${ADMIN_LAST_NAME:}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health

@@ -1,0 +1,18 @@
+.verify_otp_page .form_container {
+  min-width: 0;
+}
+
+.verify_otp_page .verify_otp_input {
+  padding-left: 12px;
+  letter-spacing: 8px;
+  text-align: center;
+  font-size: 24px;
+}
+
+@media (max-width: 480px) {
+  .verify_otp_page .verify_otp_input {
+    padding-left: 0;
+    letter-spacing: 4px;
+    font-size: 18px;
+  }
+}
