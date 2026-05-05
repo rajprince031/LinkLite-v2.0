@@ -40,6 +40,25 @@
   text-decoration: underline;
 }
 
+.workspace_shell.workspace_theme_dark .view_details_summary_item {
+  background: #161d2b;
+  border-color: rgba(148, 163, 184, 0.18);
+}
+
+.workspace_shell.workspace_theme_dark .view_details_summary_item span {
+  color: #93a4bc;
+}
+
+.workspace_shell.workspace_theme_dark .view_details_summary_item a,
+.workspace_shell.workspace_theme_dark .view_details_summary_item strong,
+.workspace_shell.workspace_theme_dark .view_details_summary_card h2 {
+  color: #f8fafc;
+}
+
+.workspace_shell.workspace_theme_dark .view_details_summary_item a:hover {
+  color: #7db7ff;
+}
+
 .view_details_action_row {
   display: flex;
   flex-wrap: wrap;

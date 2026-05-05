@@ -29,12 +29,16 @@ public class EmailService {
             logger.info("MAIL_USERNAME is not configured. Skipping email to {} with subject '{}'.", to, subject);
             return;
         }
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(to);
-        message.setFrom(fromAddress);
-        message.setSubject(subject);
-        message.setText(body);
-        mailSender.send(message);
+        try {
+            SimpleMailMessage message = new SimpleMailMessage();
+            message.setTo(to);
+            message.setFrom(fromAddress);
+            message.setSubject(subject);
+            message.setText(body);
+            mailSender.send(message);
+        } catch (MailException exception) {
+            logger.error("Unable to send plain email to {} with subject '{}': {}", to, subject, exception.getMessage());
+        }
     }
 
     public void sendHtmlEmail(String to, String subject, String plainBody, String htmlBody) {
@@ -45,7 +49,7 @@ public class EmailService {
 
         try {
             MimeMessage message = mailSender.createMimeMessage();
-            MimeMessageHelper helper = new MimeMessageHelper(message, "UTF-8");
+            MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
             helper.setTo(to);
             helper.setFrom(fromAddress);
             helper.setSubject(subject);

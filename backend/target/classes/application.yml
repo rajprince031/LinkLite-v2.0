@@ -6,6 +6,9 @@ spring:
     url: ${DB_URL}
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
+    hikari:
+      data-source-properties:
+        prepareThreshold: 0
     driver-class-name: ${DB_DRIVER}
 
   jpa:
@@ -38,16 +41,16 @@ app:
   base-url: ${BASE_URL}
 
   jwt-secret: ${JWT_SECRET}
-  jwt-expiration-ms: ${JWT_EXPIRATION_MS:86400000}
-  otp-expiration-minutes: ${OTP_EXPIRATION_MINUTES:10}
+  jwt-expiration-ms: ${JWT_EXPIRATION_MS}
+  otp-expiration-minutes: ${OTP_EXPIRATION_MINUTES}
   dev-print-otp: ${DEV_PRINT_OTP:false}
   seed-demo-data: ${SEED_DEMO_DATA:false}
 
   admin:
-    email: ${ADMIN_EMAIL:}
-    password: ${ADMIN_PASSWORD:}
-    first-name: ${ADMIN_FIRST_NAME:}
-    last-name: ${ADMIN_LAST_NAME:}
+    email: ${ADMIN_EMAIL}
+    password: ${ADMIN_PASSWORD}
+    first-name: ${ADMIN_FIRST_NAME}
+    last-name: ${ADMIN_LAST_NAME}
 
 management:
   endpoints:

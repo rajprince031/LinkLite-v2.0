@@ -36,47 +36,57 @@ public class UserService {
     }
 
     public AuthDtos.ProfileResponse getProfile(Account account) {
-        return authService.toProfile(account);
+        return authService.toProfile(requireManagedAccount(account));
     }
 
     @Transactional
     public AuthDtos.ProfileResponse updateProfile(Account account, AuthDtos.UpdateProfileRequest request) {
-        account.setFirstName(request.firstName().trim());
-        account.setLastName(request.lastName() == null ? "" : request.lastName().trim());
-        return authService.toProfile(account);
+        Account managedAccount = requireManagedAccount(account);
+        managedAccount.setFirstName(request.firstName().trim());
+        managedAccount.setLastName(request.lastName() == null ? "" : request.lastName().trim());
+        return authService.toProfile(managedAccount);
     }
 
     @Transactional
     public String changePassword(Account account, AuthDtos.ChangePasswordRequest request) {
-        if (!passwordEncoder.matches(request.currentPassword(), account.getPasswordHash())) {
+        Account managedAccount = requireManagedAccount(account);
+        if (!passwordEncoder.matches(request.currentPassword(), managedAccount.getPasswordHash())) {
             throw new AppException(HttpStatus.BAD_REQUEST, "Current password is incorrect");
         }
-        account.setPasswordHash(passwordEncoder.encode(request.newPassword()));
+        managedAccount.setPasswordHash(passwordEncoder.encode(request.newPassword()));
         return "Password updated successfully";
     }
 
     @Transactional
     public String deleteOwnAccount(Account account) {
-        pauseLinks(account);
-        account.setStatus(com.linklite.backend.enums.AccountStatus.DELETION_PENDING);
-        account.setDeleteRequestedAt(Instant.now());
+        Account managedAccount = requireManagedAccount(account);
+        pauseLinks(managedAccount);
+        managedAccount.setStatus(com.linklite.backend.enums.AccountStatus.DELETION_PENDING);
+        managedAccount.setDeleteRequestedAt(Instant.now());
         return "Your account is scheduled for deletion after 7 days";
     }
 
     @Transactional
     public String deactivateOwnAccount(Account account) {
-        pauseLinks(account);
-        account.setStatus(com.linklite.backend.enums.AccountStatus.INACTIVE);
-        account.setDeleteRequestedAt(null);
+        Account managedAccount = requireManagedAccount(account);
+        pauseLinks(managedAccount);
+        managedAccount.setStatus(com.linklite.backend.enums.AccountStatus.INACTIVE);
+        managedAccount.setDeleteRequestedAt(null);
         return "Your account has been deactivated";
     }
 
     @Transactional
     public AuthDtos.ProfileResponse reactivateOwnAccount(Account account) {
-        account.setStatus(com.linklite.backend.enums.AccountStatus.ACTIVE);
-        account.setDeleteRequestedAt(null);
-        restoreLinks(account);
-        return authService.toProfile(account);
+        Account managedAccount = requireManagedAccount(account);
+        managedAccount.setStatus(com.linklite.backend.enums.AccountStatus.ACTIVE);
+        managedAccount.setDeleteRequestedAt(null);
+        restoreLinks(managedAccount);
+        return authService.toProfile(managedAccount);
+    }
+
+    private Account requireManagedAccount(Account account) {
+        return accountRepository.findById(account.getId())
+            .orElseThrow(() -> new AppException(HttpStatus.NOT_FOUND, "Account not found"));
     }
 
     private void pauseLinks(Account account) {
