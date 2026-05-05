@@ -144,8 +144,8 @@ const UserWorkspaceSidebar = ({
         </div>
         <div className="workspace_sidebar_profile_meta">
           <span className="workspace_sidebar_profile_role">Workspace user</span>
-          <strong>prince</strong>
-          <small>prince@gmail.com</small>
+          <strong>{user.firstName} {user.lastName}</strong>
+          <small>{user.email}</small>
         </div>
       </button>
 
