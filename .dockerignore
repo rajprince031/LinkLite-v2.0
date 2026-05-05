@@ -1,0 +1,11 @@
+.git
+.DS_Store
+README.md
+
+client/node_modules
+client/dist
+client/.env
+
+backend/target
+backend/.env
+backend/data

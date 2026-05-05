@@ -18,6 +18,10 @@ This is the folder you should upload to GitHub.
   - Main project documentation.
 - `.gitignore`
   - Git ignore rules for local/generated files.
+- `.dockerignore`
+  - Docker build ignore rules.
+- `docker-compose.yml`
+  - Runs frontend and backend together with Docker.
 - `client/`
   - React frontend application.
 - `backend/`
@@ -35,6 +39,8 @@ Important files and folders:
   - Frontend dependencies and scripts.
 - `.env.example`
   - Frontend environment variable template.
+- `Dockerfile`
+  - Frontend production container build.
 - `vite.config.js`
   - Vite configuration.
 - `src/App.jsx`
@@ -62,6 +68,8 @@ Important files and folders:
   - Maven dependencies and build config.
 - `.env.example`
   - Backend environment variable template.
+- `Dockerfile`
+  - Backend container build.
 - `src/main/resources/application.yml`
   - Spring Boot configuration.
 - `src/main/java/com/linklite/backend/controller/`
@@ -191,6 +199,41 @@ npm run build
 cd backend
 mvn -q -DskipTests package
 ```
+
+## Docker
+
+Docker files added:
+
+- [docker-compose.yml](/Users/princeraj/Desktop/Linklite%20ReDesign/rajprince031-LinkLite-ff58ad5/docker-compose.yml)
+- [client/Dockerfile](/Users/princeraj/Desktop/Linklite%20ReDesign/rajprince031-LinkLite-ff58ad5/client/Dockerfile)
+- [backend/Dockerfile](/Users/princeraj/Desktop/Linklite%20ReDesign/rajprince031-LinkLite-ff58ad5/backend/Dockerfile)
+
+### Before running Docker
+
+Create these files first:
+
+- `backend/.env`
+- `client/.env` if you want to keep local frontend env values
+
+For Docker Compose build args, export frontend API values in your shell or place them in a root `.env` file before running:
+
+```env
+VITE_API_BASE_URL=http://localhost:8080/api
+VITE_LOCALHOST_API=http://localhost:8080/api
+```
+
+### Run with Docker
+
+From the project root:
+
+```bash
+docker compose up --build
+```
+
+This starts:
+
+- frontend on `http://localhost:5173`
+- backend on `http://localhost:8080`
 
 ## Important Before GitHub Upload
 

@@ -1,4 +1,19 @@
-# Node Modules
-node_modules
-/server/.env
+# macOS
 .DS_Store
+
+# env files
+.env
+client/.env
+backend/.env
+
+# dependencies
+node_modules
+client/node_modules
+
+# build output
+client/dist
+backend/target
+
+# local database files
+backend/data/*.mv.db
+backend/data/*.trace.db
