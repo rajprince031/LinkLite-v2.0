@@ -546,6 +546,28 @@
   color: #f9fafb;
 }
 
+.workspace_shell.workspace_theme_dark .workspace_panel,
+.workspace_shell.workspace_theme_dark .workspace_panel p,
+.workspace_shell.workspace_theme_dark .workspace_panel span,
+.workspace_shell.workspace_theme_dark .workspace_panel small,
+.workspace_shell.workspace_theme_dark .workspace_panel label,
+.workspace_shell.workspace_theme_dark .workspace_table td,
+.workspace_shell.workspace_theme_dark .workspace_table td *,
+.workspace_shell.workspace_theme_dark .workspace_activity_item,
+.workspace_shell.workspace_theme_dark .workspace_activity_item *,
+.workspace_shell.workspace_theme_dark .workspace_detail_item,
+.workspace_shell.workspace_theme_dark .workspace_detail_item *,
+.workspace_shell.workspace_theme_dark .workspace_modal_card,
+.workspace_shell.workspace_theme_dark .workspace_modal_card * {
+  color: #dbe4f0;
+}
+
+.workspace_shell.workspace_theme_dark .workspace_action_link,
+.workspace_shell.workspace_theme_dark .workspace_title_button,
+.workspace_shell.workspace_theme_dark a {
+  color: #8cc1ff;
+}
+
 .workspace_shell.workspace_theme_dark .workspace_company_card,
 .workspace_shell.workspace_theme_dark .workspace_sidebar_profile,
 .workspace_shell.workspace_theme_dark .workspace_sidebar_search,

@@ -1,4 +1,5 @@
 import "../style/AboutPage.css";
+import useWorkspaceTheme from "../hooks/useWorkspaceTheme";
 
 const features = [
   {
@@ -60,8 +61,9 @@ const features = [
 ];
 
 const AboutPage = () => {
+  const [theme] = useWorkspaceTheme();
   return (
-    <div className="about-container">
+    <div className={`about-container ${theme === "dark" ? "about_theme_dark" : ""}`}>
       <h1 className="about-title">About LinkLite</h1>
       <p className="about-description">
         LinkLite is more than a simple URL shortener. It helps you create short links, manage aliases,

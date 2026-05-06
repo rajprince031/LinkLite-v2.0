@@ -77,6 +77,7 @@
 .landing_plain_button,
 .landing_login_button,
 .landing_cta_button,
+.landing_theme_icon_button,
 .landing_feedback_close,
 .landing_paper_header button {
   border: 1px solid transparent;
@@ -87,6 +88,17 @@
   font-weight: 700;
   cursor: pointer;
   transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+}
+
+.landing_theme_icon_button {
+  width: 34px;
+  min-width: 34px;
+  padding: 0;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.12);
+  color: #eef6ff;
+  border-color: rgba(255, 255, 255, 0.18);
+  font-size: 14px;
 }
 
 .landing_plain_button {
@@ -160,6 +172,89 @@
 
 .landing_copy > p {
   max-width: 520px;
+}
+
+.landing_shell.landing_theme_dark {
+  background:
+    radial-gradient(circle at top left, rgba(74, 136, 255, 0.18), transparent 20%),
+    radial-gradient(circle at 78% 14%, rgba(133, 201, 255, 0.12), transparent 18%),
+    linear-gradient(180deg, #0f172a 0%, #111827 45%, #0f172a 100%);
+  color: #e7eef8;
+}
+
+.landing_shell.landing_theme_dark .landing_primary_panel,
+.landing_shell.landing_theme_dark .landing_feature_panel,
+.landing_shell.landing_theme_dark .landing_quote_bubble,
+.landing_shell.landing_theme_dark .landing_signal_card,
+.landing_shell.landing_theme_dark .landing_floating_stat,
+.landing_shell.landing_theme_dark .landing_note_card,
+.landing_shell.landing_theme_dark .landing_progress_card,
+.landing_shell.landing_theme_dark .landing_feature_card,
+.landing_shell.landing_theme_dark .landing_capability_strip,
+.landing_shell.landing_theme_dark .landing_feedback_dialog,
+.landing_shell.landing_theme_dark .landing_paper_front {
+  background: rgba(15, 23, 42, 0.88);
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.24);
+}
+
+.landing_shell.landing_theme_dark .landing_primary_panel {
+  background:
+    radial-gradient(circle at 76% 36%, rgba(71, 135, 255, 0.2), transparent 18%),
+    linear-gradient(180deg, rgba(15, 23, 42, 0.95) 0%, rgba(17, 24, 39, 0.95) 100%);
+}
+
+.landing_shell.landing_theme_dark .landing_copy h1,
+.landing_shell.landing_theme_dark .landing_feature_card strong,
+.landing_shell.landing_theme_dark .landing_capability_strip strong,
+.landing_shell.landing_theme_dark .landing_feedback_header h3,
+.landing_shell.landing_theme_dark .landing_note_card strong,
+.landing_shell.landing_theme_dark .landing_floating_stat strong,
+.landing_shell.landing_theme_dark .landing_quote_bubble p,
+.landing_shell.landing_theme_dark .landing_progress_card strong,
+.landing_shell.landing_theme_dark .landing_progress_card span {
+  color: #f8fafc;
+}
+
+.landing_shell.landing_theme_dark .landing_copy p,
+.landing_shell.landing_theme_dark .landing_feature_intro p,
+.landing_shell.landing_theme_dark .landing_feature_card p,
+.landing_shell.landing_theme_dark .landing_signal_card p,
+.landing_shell.landing_theme_dark .landing_note_card p,
+.landing_shell.landing_theme_dark .landing_floating_stat span,
+.landing_shell.landing_theme_dark .landing_quote_label,
+.landing_shell.landing_theme_dark .landing_feedback_form label span {
+  color: #b7c4d8;
+}
+
+.landing_shell.landing_theme_dark .landing_kicker,
+.landing_shell.landing_theme_dark .landing_feature_tag {
+  background: rgba(96, 165, 250, 0.14);
+  color: #9dcbff;
+}
+
+.landing_shell.landing_theme_dark .landing_paper_header span {
+  color: #9dcbff;
+}
+
+.landing_shell.landing_theme_dark .landing_plain_button,
+.landing_shell.landing_theme_dark .landing_theme_icon_button,
+.landing_shell.landing_theme_dark .landing_login_button {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: #eef6ff;
+}
+
+.landing_shell.landing_theme_dark .landing_feedback_form input,
+.landing_shell.landing_theme_dark .landing_feedback_form textarea {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #f8fafc;
+}
+
+.landing_shell.landing_theme_dark .landing_feedback_form input::placeholder,
+.landing_shell.landing_theme_dark .landing_feedback_form textarea::placeholder {
+  color: #9aa8bd;
 }
 
 .landing_quote_bubble,

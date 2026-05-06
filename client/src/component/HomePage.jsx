@@ -1,9 +1,9 @@
 import "../style/HomePage.css";
 import axios from "axios";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import useWorkspaceTheme from "../hooks/useWorkspaceTheme";
 
 const featureCards = [
   {
@@ -59,8 +59,7 @@ const floatingQuotes = [
 const HomePage = () => {
   const LOCALHOST_API = import.meta.env.VITE_LOCALHOST_API;
   const navigate = useNavigate();
-  const user = useSelector((state) => state.userProfile);
-  const authToken = localStorage.getItem("authToken");
+  const [theme, setTheme] = useWorkspaceTheme();
   const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [feedback, setFeedback] = useState({
@@ -68,8 +67,6 @@ const HomePage = () => {
     email: "",
     message: ""
   });
-
-  const authLabel = useMemo(() => (user?.firstName ? user.firstName : "Create Account"), [user?.firstName]);
 
   const submitFeedback = () => {
     setIsSubmitting(true);
@@ -85,7 +82,7 @@ const HomePage = () => {
   };
 
   return (
-    <div className="landing_shell">
+    <div className={`landing_shell ${theme === "dark" ? "landing_theme_dark" : ""}`}>
       <div className="landing_page">
         <section className="landing_primary_panel">
           <header className="landing_topbar">
@@ -95,16 +92,23 @@ const HomePage = () => {
             </button>
 
             <div className="landing_topbar_actions">
+              <button
+                type="button"
+                className="landing_theme_icon_button"
+                onClick={() => setTheme((current) => current === "dark" ? "light" : "dark")}
+                aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+                title={theme === "dark" ? "Light mode" : "Dark mode"}
+              >
+                {theme === "dark" ? "☀" : "☾"}
+              </button>
               <button type="button" className="landing_plain_button" onClick={() => setIsFeedbackOpen(true)}>
                 Feedback
               </button>
-              {!authToken && (
-                <button type="button" className="landing_login_button" onClick={() => navigate("/login")}>
-                  Login
-                </button>
-              )}
-              <button type="button" className="landing_cta_button" onClick={() => navigate(authToken ? "/dashboard" : "/signup")}>
-                {authLabel}
+              <button type="button" className="landing_login_button" onClick={() => navigate("/login")}>
+                Login
+              </button>
+              <button type="button" className="landing_cta_button" onClick={() => navigate("/signup")}>
+                Create Account
               </button>
             </div>
           </header>

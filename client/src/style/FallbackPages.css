@@ -129,6 +129,38 @@
   color: #475467;
 }
 
+.fallback_shell.fallback_theme_dark {
+  background: linear-gradient(180deg, #0f172a 0%, #111827 100%);
+}
+
+.fallback_shell.fallback_theme_dark .fallback_card {
+  background: rgba(15, 23, 42, 0.9);
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
+}
+
+.fallback_shell.fallback_theme_dark .fallback_brand,
+.fallback_shell.fallback_theme_dark .fallback_copy h1,
+.fallback_shell.fallback_theme_dark .fallback_meta_box strong {
+  color: #f8fafc;
+}
+
+.fallback_shell.fallback_theme_dark .fallback_copy p,
+.fallback_shell.fallback_theme_dark .fallback_meta_box span {
+  color: #b7c4d8;
+}
+
+.fallback_shell.fallback_theme_dark .fallback_meta_box {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.fallback_shell.fallback_theme_dark .fallback_secondary {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #d7e3f5;
+}
+
 @media (max-width: 640px) {
   .fallback_card {
     padding: 22px;

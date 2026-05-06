@@ -5,11 +5,13 @@ import { toast } from 'react-toastify';
 import axios from 'axios';
 import Spinner from './Spinner';
 import { FIELD_LIMITS, clampValue } from '../utils/fieldLimits';
+import useWorkspaceTheme from "../hooks/useWorkspaceTheme";
 
 const SingUpPage = () => {
     const LOCALHOST_API = import.meta.env.VITE_LOCALHOST_API;
 
     const navigate = useNavigate();
+    const [theme] = useWorkspaceTheme();
     const [isSpinner, setIsSpinner] = useState(false)
     const signupAbortRef = useRef(null);
     const isMountedRef = useRef(true);
@@ -77,7 +79,7 @@ const SingUpPage = () => {
     }
 
     return (
-        <div className="main_signup_container">
+        <div className={`main_signup_container ${theme === "dark" ? "auth_theme_dark" : ""}`}>
             <div className="navbar__logo" onClick={() => navigateAwaySafely("/")}>
                 <span className="auth_brand_mark"></span>
                 <p>LinkLite</p>

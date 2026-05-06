@@ -7,6 +7,7 @@ import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
@@ -24,6 +25,7 @@ public class EmailService {
         this.fromAddress = fromAddress;
     }
 
+    @Async
     public void sendEmail(String to, String subject, String body) {
         if (fromAddress == null || fromAddress.isBlank()) {
             logger.info("MAIL_USERNAME is not configured. Skipping email to {} with subject '{}'.", to, subject);
@@ -41,6 +43,7 @@ public class EmailService {
         }
     }
 
+    @Async
     public void sendHtmlEmail(String to, String subject, String plainBody, String htmlBody) {
         if (fromAddress == null || fromAddress.isBlank()) {
             logger.info("MAIL_USERNAME is not configured. Skipping email to {} with subject '{}'.", to, subject);

@@ -3,6 +3,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import useWorkspaceTheme from "../hooks/useWorkspaceTheme";
 
 const contactPoints = [
   { title: "Product feedback", text: "Share what feels useful, unclear, or missing in LinkLite." },
@@ -13,6 +14,7 @@ const contactPoints = [
 const ContactPage = () => {
   const LOCALHOST_API = import.meta.env.VITE_LOCALHOST_API;
   const navigate = useNavigate();
+  const [theme] = useWorkspaceTheme();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [form, setForm] = useState({
     name: "",
@@ -33,7 +35,7 @@ const ContactPage = () => {
   };
 
   return (
-    <div className="contact_page_shell">
+    <div className={`contact_page_shell ${theme === "dark" ? "contact_theme_dark" : ""}`}>
       <header className="contact_page_topbar">
         <button type="button" className="contact_brand" onClick={() => navigate("/")}>
           <span className="contact_brand_mark"></span>

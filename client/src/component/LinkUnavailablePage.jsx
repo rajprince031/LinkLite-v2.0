@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import "../style/FallbackPages.css";
+import useWorkspaceTheme from "../hooks/useWorkspaceTheme";
 
 const contentByType = {
   blocked: {
@@ -32,6 +33,7 @@ const contentByType = {
 
 const LinkUnavailablePage = () => {
   const navigate = useNavigate();
+  const [theme] = useWorkspaceTheme();
   const [params] = useSearchParams();
   const type = params.get("type") || "blocked";
   const code = params.get("code") || "";
@@ -39,7 +41,7 @@ const LinkUnavailablePage = () => {
   const content = useMemo(() => contentByType[type] || contentByType["not-found"], [type]);
 
   return (
-    <div className="fallback_shell">
+    <div className={`fallback_shell ${theme === "dark" ? "fallback_theme_dark" : ""}`}>
       <div className="fallback_card">
         <button type="button" className="fallback_brand fallback_brand_button" onClick={() => navigate("/")}>
           <span className="fallback_brand_mark"></span>

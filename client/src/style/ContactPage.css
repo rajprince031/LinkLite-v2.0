@@ -8,6 +8,13 @@
   padding: 16px;
 }
 
+.contact_page_shell.contact_theme_dark {
+  background:
+    radial-gradient(circle at top left, rgba(79, 143, 217, 0.16), transparent 22%),
+    linear-gradient(180deg, #0f172a 0%, #111827 100%);
+  color: #e7eef8;
+}
+
 .contact_page_topbar,
 .contact_page_main {
   max-width: 1080px;
@@ -77,6 +84,46 @@
   border-color: #4f8fd9;
   color: #fff;
   box-shadow: 0 12px 24px rgba(79, 143, 217, 0.18);
+}
+
+.contact_page_shell.contact_theme_dark .contact_page_topbar,
+.contact_page_shell.contact_theme_dark .contact_hero_card,
+.contact_page_shell.contact_theme_dark .contact_point_card,
+.contact_page_shell.contact_theme_dark .contact_form_card {
+  background: rgba(15, 23, 42, 0.88);
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.24);
+}
+
+.contact_page_shell.contact_theme_dark .contact_brand,
+.contact_page_shell.contact_theme_dark .contact_hero_copy h1,
+.contact_page_shell.contact_theme_dark .contact_point_card strong,
+.contact_page_shell.contact_theme_dark .contact_form_head h2 {
+  color: #f8fafc;
+}
+
+.contact_page_shell.contact_theme_dark .contact_hero_copy p,
+.contact_page_shell.contact_theme_dark .contact_point_card p,
+.contact_page_shell.contact_theme_dark .contact_form_fields span {
+  color: #b7c4d8;
+}
+
+.contact_page_shell.contact_theme_dark .contact_nav_button {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #d7e3f5;
+}
+
+.contact_page_shell.contact_theme_dark .contact_form_fields input,
+.contact_page_shell.contact_theme_dark .contact_form_fields textarea {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #f8fafc;
+}
+
+.contact_page_shell.contact_theme_dark .contact_form_fields input::placeholder,
+.contact_page_shell.contact_theme_dark .contact_form_fields textarea::placeholder {
+  color: #9aa8bd;
 }
 
 .contact_page_main {

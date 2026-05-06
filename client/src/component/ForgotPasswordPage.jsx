@@ -4,10 +4,12 @@ import { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import Spinner from "./Spinner";
+import useWorkspaceTheme from "../hooks/useWorkspaceTheme";
 
 const ForgotPasswordPage = () => {
   const LOCALHOST_API = import.meta.env.VITE_LOCALHOST_API;
   const navigate = useNavigate();
+  const [theme] = useWorkspaceTheme();
   const [step, setStep] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [form, setForm] = useState({
@@ -49,7 +51,7 @@ const ForgotPasswordPage = () => {
   };
 
   return (
-    <div className="main_login_container">
+    <div className={`main_login_container ${theme === "dark" ? "auth_theme_dark" : ""}`}>
       <div className="navbar__logo" onClick={() => navigate("/")}>
         <span className="auth_brand_mark"></span>
         <p>LinkLite</p>

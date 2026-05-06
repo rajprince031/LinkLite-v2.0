@@ -5,10 +5,12 @@ import { useState } from 'react';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import Spinner from './Spinner';
+import useWorkspaceTheme from "../hooks/useWorkspaceTheme";
 
 const VerifyOtpPage = () => {
     const LOCALHOST_API = import.meta.env.VITE_LOCALHOST_API;
     const navigate = useNavigate();
+    const [theme] = useWorkspaceTheme();
     const [searchParams] = useSearchParams();
     const email = searchParams.get("email") || "";
     const [otp, setOtp] = useState("");
@@ -37,7 +39,7 @@ const VerifyOtpPage = () => {
     };
 
     return (
-        <div className="main_signup_container verify_otp_page">
+        <div className={`main_signup_container verify_otp_page ${theme === "dark" ? "auth_theme_dark" : ""}`}>
             <div className="navbar__logo" onClick={() => navigate("/")}>
                 <span className="auth_brand_mark"></span>
                 <p>LinkLite</p>

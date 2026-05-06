@@ -6,9 +6,11 @@ import { useDispatch } from "react-redux";
 import { userDetails } from "../redux/slices/UserDetails";
 import axios from "axios";
 import Spinner from "./Spinner";
+import useWorkspaceTheme from "../hooks/useWorkspaceTheme";
 const LogInPage = () => {
     const LOCALHOST_API = import.meta.env.VITE_LOCALHOST_API;
     const navigate = useNavigate();
+    const [theme] = useWorkspaceTheme();
     const { pathname, search } = useLocation();
     const dispatch = useDispatch();
     const [isSpinner, setIsSpinner] = useState(false);
@@ -53,7 +55,7 @@ const LogInPage = () => {
     };
 
     return (
-        <div className="main_login_container">
+        <div className={`main_login_container ${theme === "dark" ? "auth_theme_dark" : ""}`}>
             <div className="navbar__logo" onClick={() => { navigate("/"); }}>
                 <span className="auth_brand_mark"></span>
                 <p>LinkLite</p>

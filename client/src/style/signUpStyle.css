@@ -14,15 +14,55 @@
 .main_signup_container .navbar__logo {
   width: fit-content;
   position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.main_signup_container .navbar__logo p {
+  margin: 0;
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: #0f172a;
 }
 
 .main_signup_container .auth_brand_mark {
-  width: 16px;
-  height: 16px;
-  border-radius: 4px;
+  width: 18px;
+  height: 18px;
+  border-radius: 5px;
   background: linear-gradient(135deg, #4f8fd9, #3977bd);
-  box-shadow: 10px 0 0 rgba(191, 213, 238, 0.94);
-  margin-right: 2px;
+  box-shadow: 12px 0 0 rgba(191, 213, 238, 0.94);
+  flex: 0 0 auto;
+}
+
+.main_signup_container .bubble-left {
+  position: absolute;
+  left: calc(100% + 12px);
+  top: 2px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: rgba(71, 85, 105, 0.86);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+  box-shadow: 0 14px 28px rgba(15, 23, 42, 0.16);
+}
+
+.main_signup_container .bubble-left::before {
+  content: "";
+  position: absolute;
+  left: -6px;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  background: inherit;
+  transform: translateY(-50%) rotate(45deg);
 }
 
 .main_signup_container .form_container {
@@ -154,6 +194,45 @@
   text-align: center;
 }
 
+.main_signup_container.auth_theme_dark {
+  background:
+    radial-gradient(circle at top right, rgba(79, 143, 217, 0.18), transparent 30%),
+    linear-gradient(180deg, #0f172a 0%, #111827 100%);
+}
+
+.main_signup_container.auth_theme_dark .navbar__logo p,
+.main_signup_container.auth_theme_dark .title,
+.main_signup_container.auth_theme_dark .input_field {
+  color: #f8fafc;
+}
+
+.main_signup_container.auth_theme_dark .form_container {
+  background: rgba(15, 23, 42, 0.88);
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.28);
+}
+
+.main_signup_container.auth_theme_dark .subtitle,
+.main_signup_container.auth_theme_dark .note,
+.main_signup_container.auth_theme_dark .password_description,
+.main_signup_container.auth_theme_dark .input_label,
+.main_signup_container.auth_theme_dark .signup_page_footer p {
+  color: #c4cedc;
+}
+
+.main_signup_container.auth_theme_dark .note strong {
+  color: #8cc1ff;
+}
+
+.main_signup_container.auth_theme_dark .input_field {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.main_signup_container.auth_theme_dark .input_field::placeholder {
+  color: #9aa8bd;
+}
+
 @media (max-width: 720px) {
   .main_signup_container {
     justify-content: center;
@@ -179,6 +258,10 @@
     display: none;
   }
 
+  .main_signup_container .navbar__logo p {
+    font-size: 26px;
+  }
+
   .main_signup_container .title {
     font-size: 24px;
   }
@@ -200,6 +283,16 @@
     padding: 14px;
     gap: 10px;
     border-radius: 16px;
+  }
+
+  .main_signup_container .navbar__logo p {
+    font-size: 24px;
+  }
+
+  .main_signup_container .auth_brand_mark {
+    width: 16px;
+    height: 16px;
+    box-shadow: 10px 0 0 rgba(191, 213, 238, 0.94);
   }
 
   .main_signup_container .title_container {

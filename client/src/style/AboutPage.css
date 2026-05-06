@@ -28,6 +28,21 @@
   font-family: "Inter", "Segoe UI", sans-serif;
 }
 
+.about-container.about_theme_dark {
+  background:
+    radial-gradient(circle at top left, rgba(74, 136, 255, 0.18), transparent 18%),
+    radial-gradient(circle at 78% 14%, rgba(133, 201, 255, 0.12), transparent 18%),
+    linear-gradient(180deg, #0f172a 0%, #111827 45%, #0f172a 100%);
+}
+
+.about-container.about_theme_dark .about-title {
+  color: #f8fafc;
+}
+
+.about-container.about_theme_dark .about-description {
+  color: #b7c4d8;
+}
+
 .features-grid {
   max-width: 1180px;
   margin: 0 auto;

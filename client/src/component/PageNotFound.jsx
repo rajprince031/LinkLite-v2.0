@@ -1,10 +1,12 @@
 import { Link, useNavigate } from "react-router-dom";
 import "../style/FallbackPages.css";
+import useWorkspaceTheme from "../hooks/useWorkspaceTheme";
 
 const PageNotFound = () => {
   const navigate = useNavigate();
+  const [theme] = useWorkspaceTheme();
   return (
-    <div className="fallback_shell">
+    <div className={`fallback_shell ${theme === "dark" ? "fallback_theme_dark" : ""}`}>
       <div className="fallback_card">
         <button type="button" className="fallback_brand fallback_brand_button" onClick={() => navigate("/")}>
           <span className="fallback_brand_mark"></span>
