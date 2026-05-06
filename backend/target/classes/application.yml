@@ -25,8 +25,8 @@ spring:
       path: /h2-console
 
   mail:
-    host: smtp.gmail.com
-    port: 587
+    host: ${MAIL_HOST:smtp.gmail.com}
+    port: ${MAIL_PORT:587}
     username: ${MAIL_USERNAME}
     password: ${MAIL_PASSWORD}
     properties:
@@ -36,12 +36,8 @@ spring:
           connectiontimeout: ${MAIL_CONNECTION_TIMEOUT_MS:5000}
           timeout: ${MAIL_TIMEOUT_MS:5000}
           writetimeout: ${MAIL_WRITE_TIMEOUT_MS:5000}
-          ssl:
-            trust: ${MAIL_SSL_TRUST:smtp.gmail.com}
-            protocols: ${MAIL_SSL_PROTOCOLS:TLSv1.2}
           starttls:
             enable: true
-            required: ${MAIL_STARTTLS_REQUIRED:true}
 
 app:
   frontend-url: ${FRONTEND_URL}
