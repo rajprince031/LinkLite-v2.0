@@ -3,6 +3,7 @@ import "../style/GenerateUrl.css";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { FIELD_LIMITS, clampValue } from "../utils/fieldLimits";
+import Spinner from "./Spinner";
 
 export default function GenerateLink({ updateNewUrl, triggerClassName = "", triggerContent = "+ Create Link" }) {
     const expiryOptions = [
@@ -16,6 +17,7 @@ export default function GenerateLink({ updateNewUrl, triggerClassName = "", trig
     ];
 
     const [isOpen, setIsOpen] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const authToken = localStorage.getItem("authToken");
     const LOCALHOST_API = import.meta.env.VITE_LOCALHOST_API;
 
@@ -30,8 +32,10 @@ export default function GenerateLink({ updateNewUrl, triggerClassName = "", trig
         active: true,
     });
 
-    const handleCloseDialogBox = () => {
+    const handleCloseDialogBox = (force = false) => {
+        if (isSubmitting && !force) return;
         setIsOpen(false);
+        setIsSubmitting(false);
         updateUserURL({
             title: "",
             targetUrl: "",
@@ -56,6 +60,7 @@ export default function GenerateLink({ updateNewUrl, triggerClassName = "", trig
     };
 
     const handleGenerateURL = async () => {
+        if (isSubmitting) return;
         const expiresAtValue =
             expiryType === "none"
                 ? null
@@ -67,6 +72,7 @@ export default function GenerateLink({ updateNewUrl, triggerClassName = "", trig
             return toast.error("Please select a custom expiry date and time");
         }
 
+        setIsSubmitting(true);
         axios.post(`${apiURL}/links`, {
             ...userURL,
             expiresAt: expiresAtValue
@@ -78,10 +84,12 @@ export default function GenerateLink({ updateNewUrl, triggerClassName = "", trig
         })
             .then((res) => {
                 updateNewUrl(res.data);
-                handleCloseDialogBox();
+                handleCloseDialogBox(true);
                 toast.success('Link created successfully.')
             }).catch((err)=>{
                 toast.error(err.response?.data?.message || err.response?.data?.error || 'Something went wrong')
+            }).finally(() => {
+                setIsSubmitting(false);
             });
     };
     return (
@@ -149,7 +157,21 @@ export default function GenerateLink({ updateNewUrl, triggerClassName = "", trig
                             ></input>}
                         </div>
                         <div className='dashboard_gen_button'>
-                            <button type="button" className="generate_link_submit_button" onClick={handleGenerateURL}><span>Generate URL</span></button>
+                            <button
+                                type="button"
+                                className={`generate_link_submit_button ${isSubmitting ? "is-loading" : ""}`}
+                                onClick={handleGenerateURL}
+                                disabled={isSubmitting}
+                            >
+                                {isSubmitting ? (
+                                    <>
+                                        <span className="generate_link_submit_spinner"><Spinner /></span>
+                                        <span>Generating...</span>
+                                    </>
+                                ) : (
+                                    <span>Generate URL</span>
+                                )}
+                            </button>
                         </div>
                     </div>
                 </div>

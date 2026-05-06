@@ -1,6 +1,6 @@
 import '../style/signUpStyle.css';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import Spinner from './Spinner';
@@ -11,6 +11,8 @@ const SingUpPage = () => {
 
     const navigate = useNavigate();
     const [isSpinner, setIsSpinner] = useState(false)
+    const signupAbortRef = useRef(null);
+    const isMountedRef = useRef(true);
     const [user, updateUser] = useState({
         firstName: "",
         lastName: "",
@@ -18,43 +20,65 @@ const SingUpPage = () => {
         password: ""
     });
 
+    useEffect(() => {
+        isMountedRef.current = true;
+        return () => {
+            isMountedRef.current = false;
+            signupAbortRef.current?.abort();
+        };
+    }, []);
+
+    const navigateAwaySafely = (path) => {
+        signupAbortRef.current?.abort();
+        navigate(path);
+    };
+
     const handleSignUpRequest = async () => {
-        setIsSpinner(true)
+        signupAbortRef.current?.abort();
+        const controller = new AbortController();
+        signupAbortRef.current = controller;
+        setIsSpinner(true);
         try {
-            axios.post(`${LOCALHOST_API}/auth/signup`, user, {
+            const res = await axios.post(`${LOCALHOST_API}/auth/signup`, user, {
                 headers: {
                     'Content-Type': 'application/json'
                 },
+                signal: controller.signal
+            });
 
-            }).then(res => {
-                toast.success(res.data.message || "Registration successfully");
-                setIsSpinner(false)
-                updateUser({
-                    firstName: "",
-                    lastName: "",
-                    email: "",
-                    password: ""
-                })
-                navigate(`/verify-otp?email=${encodeURIComponent(user.email)}`)
-                return
-            }).catch(err => {
-                setIsSpinner(false)
-                toast.error(err.response?.data?.message || err.response?.data?.error || 'Something went wrong')
-            })
+            if (!isMountedRef.current) {
+                return;
+            }
+
+            toast.success(res.data.message || "Registration successfully");
+            setIsSpinner(false);
+            const emailToVerify = user.email;
+            updateUser({
+                firstName: "",
+                lastName: "",
+                email: "",
+                password: ""
+            });
+            navigate(`/verify-otp?email=${encodeURIComponent(emailToVerify)}`, { replace: true });
         } catch (error) {
-
-            setIsSpinner(false)
-            toast.error('something went wrong')
-            return;
+            if (axios.isCancel(error) || error?.code === "ERR_CANCELED") {
+                return;
+            }
+            if (!isMountedRef.current) {
+                return;
+            }
+            setIsSpinner(false);
+            const message = error.response?.data?.message || error.response?.data?.error || 'Something went wrong';
+            toast.error(message);
         }
     }
     const moveToLogInPage = () => {
-        navigate('/login')
+        navigateAwaySafely('/login')
     }
 
     return (
         <div className="main_signup_container">
-            <div className="navbar__logo" onClick={() => navigate("/")}>
+            <div className="navbar__logo" onClick={() => navigateAwaySafely("/")}>
                 <span className="auth_brand_mark"></span>
                 <p>LinkLite</p>
                 <div className="bubble-left">Experience it now!</div>

@@ -55,6 +55,23 @@
   color: #f8fafc;
 }
 
+.workspace_shell.workspace_theme_dark .view_details_summary_card,
+.workspace_shell.workspace_theme_dark .view_details_block_panel {
+  color: #f8fafc;
+}
+
+.workspace_shell.workspace_theme_dark .view_details_summary_card p,
+.workspace_shell.workspace_theme_dark .view_details_block_panel p,
+.workspace_shell.workspace_theme_dark .view_details_block_panel h2,
+.workspace_shell.workspace_theme_dark .view_details_block_panel .workspace_activity_item_main strong,
+.workspace_shell.workspace_theme_dark .view_details_block_panel .workspace_activity_item_main span {
+  color: #d7e0ec;
+}
+
+.workspace_shell.workspace_theme_dark .view_details_block_panel .workspace_activity_item_main strong {
+  color: #f8fafc;
+}
+
 .workspace_shell.workspace_theme_dark .view_details_summary_item a:hover {
   color: #7db7ff;
 }

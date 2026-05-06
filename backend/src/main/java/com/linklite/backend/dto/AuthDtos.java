@@ -19,7 +19,8 @@ public class AuthDtos {
         @Pattern(
             regexp = "^(?=.*[A-Za-z])(?=.*\\d).{8,}$",
             message = "Password must contain at least one letter and one number"
-        ) String password
+        ) String password,
+        Boolean replacePending
     ) {
     }
 
