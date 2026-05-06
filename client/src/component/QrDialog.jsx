@@ -64,7 +64,6 @@ const QrDialog = ({ link, onClose }) => {
         <div className="workspace_qr_stage">
           <div className="workspace_qr_stage_inner">
             <img className="workspace_qr_preview" src={link.qrCodeDataUrl} alt={link.title} />
-            <div className="workspace_qr_logo_overlay">LL</div>
           </div>
         </div>
 

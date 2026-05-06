@@ -207,9 +207,6 @@ const Dashboard = () => {
   const pageSize = 8;
 
   const getPagedLinks = (links) => {
-    //Adding line
-      console.log("getPagedLinks called with links length:", links);  
-    //ending line
     const totalPages = Math.max(1, Math.ceil(links.length / pageSize));
     const safePage = Math.min(currentPage, totalPages);
     const start = (safePage - 1) * pageSize;

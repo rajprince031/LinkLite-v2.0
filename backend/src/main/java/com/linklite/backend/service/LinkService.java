@@ -89,13 +89,14 @@ public class LinkService {
             boolean expired = link.getExpiresAt() != null && link.getExpiresAt().isBefore(now);
             String statusLabel = expired ? "Expired" : (link.isActive() ? "Active" : "Inactive");
             String alias = link.getCustomAlias() != null && !link.getCustomAlias().isBlank() ? link.getCustomAlias() : link.getShortCode();
+            String shortUrl = buildShortUrl(alias);
             return new DashboardDtos.LinkTableItem(
                 link.getId(),
                 link.getTitle(),
-                baseUrl + "/" + alias,
+                shortUrl,
                 link.getTargetUrl(),
                 alias,
-                qrCodeService.generatePngDataUrl(baseUrl + "/" + alias),
+                qrCodeService.generatePngDataUrl(shortUrl),
                 link.isActive(),
                 statusLabel,
                 link.getClickCount(),
@@ -122,11 +123,12 @@ public class LinkService {
                 .map(visit -> {
                     Link link = visit.getLink();
                     String alias = link.getCustomAlias() != null && !link.getCustomAlias().isBlank() ? link.getCustomAlias() : link.getShortCode();
+                    String shortUrl = buildShortUrl(alias);
                     return new DashboardDtos.VisitActivityItem(
                         link.getId(),
                         link.getTitle(),
                         alias,
-                        baseUrl + "/" + alias,
+                        shortUrl,
                         link.getTargetUrl(),
                         visit.getIpAddress(),
                         visit.getCountry(),
@@ -304,7 +306,7 @@ public class LinkService {
 
     public LinkDtos.LinkSummaryResponse toSummary(Link link) {
         String visibleCode = link.getCustomAlias() != null && !link.getCustomAlias().isBlank() ? link.getCustomAlias() : link.getShortCode();
-        String shortUrl = baseUrl + "/" + visibleCode;
+        String shortUrl = buildShortUrl(visibleCode);
         return new LinkDtos.LinkSummaryResponse(
             link.getId(),
             link.getTitle(),
@@ -318,6 +320,11 @@ public class LinkService {
             qrCodeService.generatePngDataUrl(shortUrl),
             link.getCreatedAt()
         );
+    }
+
+    private String buildShortUrl(String code) {
+        String normalizedBaseUrl = baseUrl.endsWith("/") ? baseUrl.substring(0, baseUrl.length() - 1) : baseUrl;
+        return normalizedBaseUrl + "/" + code;
     }
 
     public LinkDtos.VisitResponse toVisitResponse(LinkVisit visit) {
