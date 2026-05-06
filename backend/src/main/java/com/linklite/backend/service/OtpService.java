@@ -100,7 +100,7 @@ public class OtpService {
                 + "</div>"
                 + "</div>"
                 + "</div>";
-        emailService.sendHtmlEmail(destinationEmail, subject, plainBody, htmlBody);
+        emailService.sendHtmlEmailOrThrow(destinationEmail, subject, plainBody, htmlBody);
     }
 
     @Transactional

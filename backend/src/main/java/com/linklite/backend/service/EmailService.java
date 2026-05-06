@@ -1,8 +1,10 @@
 package com.linklite.backend.service;
 
+import com.linklite.backend.util.AppException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -23,6 +25,28 @@ public class EmailService {
     public EmailService(JavaMailSender mailSender, @Value("${spring.mail.username:}") String fromAddress) {
         this.mailSender = mailSender;
         this.fromAddress = fromAddress;
+    }
+
+    public void sendHtmlEmailOrThrow(String to, String subject, String plainBody, String htmlBody) {
+        if (fromAddress == null || fromAddress.isBlank()) {
+            throw new AppException(HttpStatus.SERVICE_UNAVAILABLE, "Email service is not configured right now");
+        }
+
+        try {
+            MimeMessage message = mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+            helper.setTo(to);
+            helper.setFrom(fromAddress);
+            helper.setSubject(subject);
+            helper.setText(plainBody, htmlBody);
+            mailSender.send(message);
+        } catch (MessagingException | MailException exception) {
+            logger.error("Unable to send OTP email to {} with subject '{}': {}", to, subject, exception.getMessage());
+            throw new AppException(
+                HttpStatus.SERVICE_UNAVAILABLE,
+                "We could not send the OTP email right now. Please try again in a moment."
+            );
+        }
     }
 
     @Async("mailTaskExecutor")
