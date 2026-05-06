@@ -57,6 +57,7 @@ com/linklite/backend/dto/AuthDtos$RegisterRequest.class
 com/linklite/backend/controller/AuthController.class
 com/linklite/backend/dto/DashboardDtos$UserDashboardResponse.class
 com/linklite/backend/config/H2SchemaCompatibilityConfig.class
+com/linklite/backend/config/AsyncConfig.class
 com/linklite/backend/dto/AdminDtos$SummaryMetric.class
 com/linklite/backend/enums/AccountStatus.class
 com/linklite/backend/dto/AuthDtos.class

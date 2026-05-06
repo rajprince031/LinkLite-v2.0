@@ -36,8 +36,12 @@ spring:
           connectiontimeout: ${MAIL_CONNECTION_TIMEOUT_MS:5000}
           timeout: ${MAIL_TIMEOUT_MS:5000}
           writetimeout: ${MAIL_WRITE_TIMEOUT_MS:5000}
+          ssl:
+            trust: ${MAIL_SSL_TRUST:smtp.gmail.com}
+            protocols: ${MAIL_SSL_PROTOCOLS:TLSv1.2}
           starttls:
             enable: true
+            required: ${MAIL_STARTTLS_REQUIRED:true}
 
 app:
   frontend-url: ${FRONTEND_URL}

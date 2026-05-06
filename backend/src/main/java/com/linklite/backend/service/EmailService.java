@@ -25,7 +25,7 @@ public class EmailService {
         this.fromAddress = fromAddress;
     }
 
-    @Async
+    @Async("mailTaskExecutor")
     public void sendEmail(String to, String subject, String body) {
         if (fromAddress == null || fromAddress.isBlank()) {
             logger.info("MAIL_USERNAME is not configured. Skipping email to {} with subject '{}'.", to, subject);
@@ -43,7 +43,7 @@ public class EmailService {
         }
     }
 
-    @Async
+    @Async("mailTaskExecutor")
     public void sendHtmlEmail(String to, String subject, String plainBody, String htmlBody) {
         if (fromAddress == null || fromAddress.isBlank()) {
             logger.info("MAIL_USERNAME is not configured. Skipping email to {} with subject '{}'.", to, subject);

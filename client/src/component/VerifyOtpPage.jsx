@@ -15,8 +15,10 @@ const VerifyOtpPage = () => {
     const email = searchParams.get("email") || "";
     const [otp, setOtp] = useState("");
     const [isSpinner, setIsSpinner] = useState(false);
+    const [isResending, setIsResending] = useState(false);
 
     const handleVerifyOtp = () => {
+        if (isSpinner || isResending) return;
         setIsSpinner(true);
         axios.post(`${LOCALHOST_API}/auth/verify-otp`, { email, otp }, {
             headers: {
@@ -33,9 +35,12 @@ const VerifyOtpPage = () => {
     };
 
     const handleResendOtp = () => {
+        if (isSpinner || isResending) return;
+        setIsResending(true);
         axios.post(`${LOCALHOST_API}/auth/resend-otp/${encodeURIComponent(email)}`)
             .then((res) => toast.success(res.data.message || 'OTP sent again'))
-            .catch((err) => toast.error(err.response?.data?.message || 'Unable to resend OTP'));
+            .catch((err) => toast.error(err.response?.data?.message || 'Unable to resend OTP'))
+            .finally(() => setIsResending(false));
     };
 
     return (
@@ -64,12 +69,14 @@ const VerifyOtpPage = () => {
                     />
                 </div>
 
-                <button onClick={handleVerifyOtp} className="sign-in_btn">
+                <button onClick={handleVerifyOtp} className="sign-in_btn" disabled={isSpinner || isResending}>
                     {isSpinner && <span><Spinner /></span>}
                     {!isSpinner && <span>Verify OTP</span>}
                 </button>
 
-                <p className="note" onClick={handleResendOtp}>Didn&apos;t receive it? <strong>Resend OTP</strong></p>
+                <p className="note" onClick={handleResendOtp}>
+                    Didn&apos;t receive it? <strong>{isResending ? "Sending..." : "Resend OTP"}</strong>
+                </p>
             </div>
             <div className="signup_page_footer">
                 <p>© 2024 LINKLITE. All rights reserved.</p>

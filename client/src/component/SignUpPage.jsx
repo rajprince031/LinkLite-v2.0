@@ -36,6 +36,7 @@ const SingUpPage = () => {
     };
 
     const handleSignUpRequest = async () => {
+        if (isSpinner) return;
         signupAbortRef.current?.abort();
         const controller = new AbortController();
         signupAbortRef.current = controller;
@@ -173,7 +174,7 @@ const SingUpPage = () => {
                     />
                 </div>
                 <label className="password_description">Password must be at least 8 characters long, include at least one letter, and at least one number.</label>
-                <button onClick={handleSignUpRequest} className="sign-in_btn">
+                <button onClick={handleSignUpRequest} className="sign-in_btn" disabled={isSpinner}>
                     {isSpinner && <span><Spinner /></span>}
                     {!isSpinner && <span>Sign Up</span>}
                 </button>

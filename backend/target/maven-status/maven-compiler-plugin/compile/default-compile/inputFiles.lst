@@ -1,4 +1,5 @@
 /Users/princeraj/Desktop/Linklite ReDesign/rajprince031-LinkLite-ff58ad5/backend/src/main/java/com/linklite/backend/LinkLiteBackendApplication.java
+/Users/princeraj/Desktop/Linklite ReDesign/rajprince031-LinkLite-ff58ad5/backend/src/main/java/com/linklite/backend/config/AsyncConfig.java
 /Users/princeraj/Desktop/Linklite ReDesign/rajprince031-LinkLite-ff58ad5/backend/src/main/java/com/linklite/backend/config/H2SchemaCompatibilityConfig.java
 /Users/princeraj/Desktop/Linklite ReDesign/rajprince031-LinkLite-ff58ad5/backend/src/main/java/com/linklite/backend/config/SecurityConfig.java
 /Users/princeraj/Desktop/Linklite ReDesign/rajprince031-LinkLite-ff58ad5/backend/src/main/java/com/linklite/backend/config/SeedConfig.java

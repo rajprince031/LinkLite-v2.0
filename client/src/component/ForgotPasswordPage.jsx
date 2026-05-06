@@ -20,6 +20,7 @@ const ForgotPasswordPage = () => {
   });
 
   const requestOtp = () => {
+    if (isLoading) return;
     setIsLoading(true);
     axios.post(`${LOCALHOST_API}/auth/forgot-password`, { email: form.email }, {
       headers: { "Content-Type": "application/json" }
@@ -32,6 +33,7 @@ const ForgotPasswordPage = () => {
   };
 
   const resetPassword = () => {
+    if (isLoading) return;
     if (form.newPassword !== form.confirmPassword) {
       return toast.error("Passwords do not match");
     }
@@ -111,7 +113,7 @@ const ForgotPasswordPage = () => {
           </>
         )}
 
-        <button onClick={step === 1 ? requestOtp : resetPassword} className="sign-in_btn">
+        <button onClick={step === 1 ? requestOtp : resetPassword} className="sign-in_btn" disabled={isLoading}>
           {isLoading ? <span><Spinner /></span> : <span>{step === 1 ? "Send OTP" : "Reset Password"}</span>}
         </button>
 

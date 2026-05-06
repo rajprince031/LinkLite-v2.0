@@ -2,6 +2,7 @@ import "../style/HomePage.css";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import useWorkspaceTheme from "../hooks/useWorkspaceTheme";
 
@@ -59,9 +60,12 @@ const floatingQuotes = [
 const HomePage = () => {
   const LOCALHOST_API = import.meta.env.VITE_LOCALHOST_API;
   const navigate = useNavigate();
+  const user = useSelector((state) => state.userProfile);
   const [theme, setTheme] = useWorkspaceTheme();
   const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const authToken = localStorage.getItem("authToken");
+  const firstName = user?.firstName?.trim?.() || "";
   const [feedback, setFeedback] = useState({
     name: "",
     email: "",
@@ -104,12 +108,20 @@ const HomePage = () => {
               <button type="button" className="landing_plain_button" onClick={() => setIsFeedbackOpen(true)}>
                 Feedback
               </button>
-              <button type="button" className="landing_login_button" onClick={() => navigate("/login")}>
-                Login
-              </button>
-              <button type="button" className="landing_cta_button" onClick={() => navigate("/signup")}>
-                Create Account
-              </button>
+              {authToken ? (
+                <button type="button" className="landing_cta_button" onClick={() => navigate("/dashboard")}>
+                  {firstName || "Dashboard"}
+                </button>
+              ) : (
+                <>
+                  <button type="button" className="landing_login_button" onClick={() => navigate("/login")}>
+                    Login
+                  </button>
+                  <button type="button" className="landing_cta_button" onClick={() => navigate("/signup")}>
+                    Create Account
+                  </button>
+                </>
+              )}
             </div>
           </header>
 
