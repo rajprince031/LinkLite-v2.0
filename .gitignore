@@ -5,7 +5,7 @@
 .env
 client/.env
 backend/.env
-backend/.env.example
+backend/*.example
 
 
 # dependencies
