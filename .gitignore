@@ -3,9 +3,9 @@
 
 # env files
 .env
-.example
 client/.env
 backend/.env
+backend/.env.example
 
 
 # dependencies
