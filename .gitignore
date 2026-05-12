@@ -3,8 +3,11 @@
 
 # env files
 .env
+*.env
 client/.env
 backend/.env
+client/*.env
+backend/*.env
 
 # dependencies
 node_modules
