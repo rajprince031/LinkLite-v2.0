@@ -3,7 +3,7 @@
 
 # env files
 .env
-.env.example
+.example
 client/.env
 backend/.env
 
