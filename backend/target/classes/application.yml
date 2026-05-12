@@ -24,24 +24,15 @@ spring:
       enabled: ${H2_CONSOLE_ENABLED:false}
       path: /h2-console
 
-  mail:
-    host: ${MAIL_HOST:smtp.gmail.com}
-    port: ${MAIL_PORT:587}
-    username: ${MAIL_USERNAME}
-    password: ${MAIL_PASSWORD}
-    properties:
-      mail:
-        smtp:
-          auth: true
-          connectiontimeout: ${MAIL_CONNECTION_TIMEOUT_MS:5000}
-          timeout: ${MAIL_TIMEOUT_MS:5000}
-          writetimeout: ${MAIL_WRITE_TIMEOUT_MS:5000}
-          starttls:
-            enable: true
-
 app:
   frontend-url: ${FRONTEND_URL}
   base-url: ${BASE_URL}
+  mail:
+    api-url: ${MAIL_API_URL:https://api.brevo.com/v3/smtp/email}
+    api-key: ${MAIL_API_KEY}
+    from-address: ${MAIL_FROM}
+    from-name: ${MAIL_FROM_NAME:LinkLite}
+    request-timeout-ms: ${MAIL_REQUEST_TIMEOUT_MS:5000}
 
   jwt-secret: ${JWT_SECRET}
   jwt-expiration-ms: ${JWT_EXPIRATION_MS}
